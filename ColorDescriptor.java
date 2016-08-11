@@ -1,4 +1,4 @@
-package src;
+package org.hipi.tools.hibHsvHist;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +104,7 @@ public class ColorDescriptor {
 		double[] level = { ranges.get(1, 0)[0] / bin.get(0, 0)[0],
 				ranges.get(3, 0)[0] / bin.get(1, 0)[0],
 				ranges.get(5, 0)[0] / bin.get(2, 0)[0] };
-//		System.out.println(level[0]+","+level[1]+","+level[2]);
+
 		for (int row = 0; row < images.rows(); row++) {
 			for (int col = 0; col < images.cols(); col++) {
 				if (mask.get(row, col)[0] == 255.0) {
@@ -131,58 +131,6 @@ public class ColorDescriptor {
 		return histM;
 	}
 
-	public static void main(String[] args) {
-		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		String path = "simitsu1.jpg";
-		Mat images = Highgui.imread(path);
-//		System.out.println(images);
-//		Imgproc.cvtColor(images, images, Imgproc.COLOR_BGR2HSV);
-//		
-//		int h = images.height();
-//		int w = images.width();
-//		double cY = h * 0.5;
-//		double cX = w * 0.5;
-//		int axesY = (int) (h * 0.75) / 2;
-//		int axesX = (int) (w * 0.75) / 2;
-//		Scalar color255 = new Scalar(255, 255, 255);
-//		Mat ellipMask = Mat.zeros(new Size(w, h), CvType.CV_8U);
-//		Core.ellipse(ellipMask, new Point(cX, cY), new Size(axesX, axesY), 0,
-//				0, 360, color255, -1);
-////		System.out.println(axesX+","+axesY);
-//		for(int row = 0; row < images.rows();row++){
-//			for(int col =0; col < images.cols();col++){
-//				
-//				if(ellipMask.get(row, col)[0]==255){
-//					System.out.println("("+row+","+col+")");
-//				}
-//				
-//				}
-//			}
-		
-		
-//		for(int row = 0; row < images.rows();row++){
-//			for(int col =0; col < images.cols();col++){
-//				if(images.get(row, col)[0]==103.0 && images.get(row, col)[1] == 51.0 && images.get(row, col)[2] == 251.0){
-//					System.out.println(row+","+col);
-//				}
-////				System.out.println(""+images.get(row, col)[0]+","+images.get(row, col)[1]+","+images.get(row, col)[2]);
-//			}
-//		}
 
-		
-//		MatOfInt bin = new MatOfInt(8, 12, 3);
-//		ColorDescriptor cd = new ColorDescriptor(bin);
-//		List<Mat> histList = cd.describe(images);
-//		for(int i = 0 ; i < 288 ; i++){
-//			System.out.println(histList.get(0).get(i, 0)[0]);
-//		}
-		for(int col=0;col<images.cols();col++){
-			for(int i = 0; i < 3 ; i++){
-				System.out.print(images.get(0, col)[i]+",");
-			}
-			System.out.print("("+0+","+col+")");
-			System.out.println();
-		}
-	}
 
 }

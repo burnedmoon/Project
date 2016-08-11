@@ -1,4 +1,4 @@
-package src;
+package org.hipi.tools.hibHsvHist;
 
 import java.io.IOException;
 import java.util.List;
@@ -50,9 +50,9 @@ public class mapColorHist extends Configured implements Tool {
 			// average
 			for (int j = 0; j < h; j++) {
 				for (int i = 0; i < w; i++) {
-					rgb[0] = (double) valData[(j * w + i) * 3 + 0] * 255.0; // R
+					rgb[2] = (double) valData[(j * w + i) * 3 + 0] * 255.0; // R
 					rgb[1] = (double) valData[(j * w + i) * 3 + 1] * 255.0; // G
-					rgb[2] = (double) valData[(j * w + i) * 3 + 2] * 255.0; // B
+					rgb[0] = (double) valData[(j * w + i) * 3 + 2] * 255.0; // B
 					mat.put(j, i, rgb);
 				}
 			}

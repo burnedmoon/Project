@@ -1,4 +1,4 @@
-package src;
+package org.hipi.tools.hibHoughline;
 
 import org.hipi.image.FloatImage;
 import org.hipi.image.HipiImageHeader;
@@ -56,32 +56,21 @@ public class hibHoughlineChar extends Configured implements Tool {
 
 				return mat;
 			}
-			
-			 public void setup(Context context)
-		               throws IOException, InterruptedException {
-
-
-		           // Load OpenCV native library
-		           try {
-		               System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		           } catch (UnsatisfiedLinkError e) {
-		               System.err.println("Native code library failed to load.\n" + e + Core.NATIVE_LIBRARY_NAME);
-		               System.exit(1);
-		           }
-
-		           super.setup(context);
-		       } // setup()
 	  
+	 
+
+
     @Override
     public void map(HipiImageHeader header, FloatImage image, Context context) throws IOException, InterruptedException  {
 
       String output = null;
-
+      
       if (header == null) {
        output = "Failed to read image header.";
      } else if (image == null) {
        output = "Failed to decode image data.";
      } else {
+       System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
        Mat images = this.convertFloatImageToOpenCVMat(image);
        houghLineTransform houghlineChar = new houghLineTransform(images);
        Map<Double, Double> DistanceRatio = houghlineChar.getDistanceRatio();
@@ -90,6 +79,7 @@ public class hibHoughlineChar extends Configured implements Tool {
        String filename = header.getMetaData("filename");
        output =  filename;
        
+       //Write in to map
        for(double key: Percentage.keySet()){
     	   output = output + "," + Percentage.get(key);
        }
@@ -127,7 +117,7 @@ public class hibHoughlineChar extends Configured implements Tool {
     Configuration conf = this.getConf();//new Configuration();
 
     Job job = Job.getInstance(conf, "hibHoughlineChar");
-    System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    
     
     job.setJarByClass(hibHoughlineChar.class);
     job.setMapperClass(hibHoughlineCharMapper.class);

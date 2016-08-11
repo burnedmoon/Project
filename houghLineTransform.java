@@ -1,6 +1,5 @@
-package src;
+package org.hipi.tools.hibHoughline;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -8,7 +7,6 @@ import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
-import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 
 public class houghLineTransform {
@@ -18,11 +16,11 @@ public class houghLineTransform {
 
 	// generator
 	public houghLineTransform() {
-		System.load("/home/cloudera/workspace/MapReduceProject/src/src/libopencv_java2411.so");
+		
 	};
 
 	public houghLineTransform(Mat image) {
-		System.load("/home/cloudera/workspace/MapReduceProject/src/src/libopencv_java2411.so");
+		
 		Mat edge = CannyGaussianBlur(image);
 		Mat lines = new Mat();
 		Mat linesV = new Mat();
@@ -150,19 +148,17 @@ public class houghLineTransform {
 		return (TreeMap<Double, Double>) r;
 	}
 
-	// main test
-	public static void main(String[] args) throws IOException {
-		// image path. it may change by HIPI
-		String path = "/home/cloudera/TokyoTower/TokyoTower0001.jpg";
-		System.load("/home/cloudera/workspace/MapReduceProject/src/src/libopencv_java2411.so");
-		Mat image =  Highgui.imread(path);
-		houghLineTransform hlt = new houghLineTransform(image);
-		System.out.println("Distance Ratio: ");
-		for (double key : hlt.getDistanceRatio().keySet()) {
-			System.out.println("" + key + "," + hlt.getDistanceRatio().get(key));
-
-		}
-		System.out.println(hlt.getDistanceRatio().size());
-	}
+//	// main test
+//	public static void main(String[] args) throws IOException {
+//		// image path. it may change by HIPI
+//		String path = "/home/cloudera/TokyoTower/TokyoTower0001.jpg";
+//		houghLineTransform hlt = new houghLineTransform(path);
+//		System.out.println("Distance Ratio: ");
+//		for (double key : hlt.getDistanceRatio().keySet()) {
+//			System.out.println("" + key + "," + hlt.getDistanceRatio().get(key));
+//
+//		}
+//		System.out.println(hlt.getDistanceRatio().size());
+//	}
 
 }
